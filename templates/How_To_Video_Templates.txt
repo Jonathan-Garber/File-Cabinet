@@ -1,0 +1,23 @@
+== Using Video Templates ==
+Video Templates are simple text files that contain the html you wish to use for displaying your video embeds.
+
+
+YouTube Videos will use the file youtube_template.txt
+Vimeo Videos will use the file vimeo_template.txt
+
+Your custom templates should go into the following folder
+/wp-content/uploads/file-cabinet-templates
+
+You can use the following template codes to insert information about the video and the video itself.
+
+{title} - This will display the Title of the video you entered when adding it to your file cabinet
+
+{description} - This will display the description you entered about the video when you added it to the file cabinet
+
+{width} - This will display the width of the video you entered when adding it to the file cabinet
+
+{height} - This will display the height of the video you entered when adding it to the file cabinet
+
+{video} - This will insert the proper Iframe for the video.
+
+Please see the default video template located in the plugins "templates" folder for an example of how to use custom templates.

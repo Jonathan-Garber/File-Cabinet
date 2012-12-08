@@ -1,0 +1,53 @@
+.tsfc-choose-attachment-method {
+	background: #FDFDFD;
+	display: inline;
+	padding: 6px 0;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+}
+.tsfc-choose-attachment-method.inactive {
+	border-bottom: 1px solid #CCC;
+}
+.tsfc-choose-attachment-method span {
+	padding: 6px;
+	cursor: pointer;
+}
+.tsfc-choose-attachment-method span.active {
+	background: white;
+}
+.tsfc-choose-attachment-method span.hover {
+	background: #ddd;
+}
+.tsfc-attachment-methods .attachment-method, .tsfc-attachment-methods .video-settings {
+	display: none;
+}
+
+.tsfc-attachment-methods.inactive {
+	display: none;
+}
+.tsfc-attachment-methods {
+	margin-top: 4px;
+	background: #FDFDFD;
+	border: 1px solid #CCC;
+	padding: 0 10px;
+}
+.tsfc-attachment-methods .attachment-method, .tsfc-attachment-methods .video-settings {
+	display: none;
+}
+.tsfc-attachment-methods .attachment-method.active, .tsfc-attachment-methods .video-settings.active {
+	display: block;
+}
+.tsfc-attachment-methods .text-input {
+	margin-top: 2px;
+	height: 25px;
+}
+
+.tsfc-insert {
+	width: 102%;
+	margin: 0 -14px;
+}
+.tsfc-use {
+	margin: 9px 0 0 -13px;
+	display: block;
+}

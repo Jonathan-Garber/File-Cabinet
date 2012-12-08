@@ -1,0 +1,13 @@
+<!--
+This is a sample of using the templates. Simply call the template code for the information you need. 
+<h2 style="color: #FF0000;">My Template</h2>
+<p>
+Video Title: {title}<br/>
+Video Width: {width}<br/>
+Video Height: {height}<br/>
+Video Description: {description}
+</p><br/><br/>
+<h2>The Video</h2> 
+-->
+
+{video}
