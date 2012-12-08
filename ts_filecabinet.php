@@ -750,6 +750,7 @@ function tsfc_save_custom_metabox( $post_id ) {
 	$permissions = $_POST['tsfc_role'];
 	$enabled = get_option( "fc_auto_thumb" );	
 	
+
 	//get selected category
 	if (!empty($cat)){
 		$category_id = $_POST['cat'];
@@ -840,13 +841,14 @@ function tsfc_save_custom_metabox( $post_id ) {
 	}
 
 	// get thumbs
+	if ($enabled == 'true'){
 		$type = tsfc_video_type($post_id);
 		if ($type == 'vimeo_video' || $type == 'youtube_video'){
 			$post_thumbnail_id = get_post_thumbnail_id( $post_id );
 			wp_delete_post( $post_thumbnail_id, true );
 			tsfc_check_add_thumb($post_id);
-
 		}
+	}
 
 
 	//do remote url	
@@ -1163,8 +1165,6 @@ function tsfc_check_add_thumb($post_id){
 				$hash = unserialize(@file_get_contents("http://vimeo.com/api/v2/video/$vimeo_id.php"));
 				if ($hash) {
 					$imageurl = $hash[0]['thumbnail_large'];
-				}else{
-					$imageurl = plugins_url( 'images/no_thumb.jpg' , __FILE__ );
 				}
 					tsfc_thumb_attach($post_id, $imageurl);
 			}
