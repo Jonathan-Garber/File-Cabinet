@@ -5,15 +5,19 @@ Donate link: http://techstudio.co/wordpress/plugins/file-cabinet
 Tags: file, embed, embedding, youtube, vimeo, dropbox, google drive
 Requires at least: 2.0.2
 Tested up to: 3.4.2
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.
+File Cabinet creates a custom post type with special functions designed for managing a library of files. Currently compatible with YouTube, Vimeo, WordPress Media and anything with a URL.
 
 == Description ==
 
 File Cabinet creates a custom post type with special functions designed for managing a library of files. Add files to the library by adding directly to WordPress's media management system, setting a remote URL to allow use of services like Dropbox and Google Drive. File Cabinet also supports YouTube and Vimeo videos via the video ID on either site. Novice users can use shortcodes to add items to their posts, while developers can take advantage of the loop and custom functions to create custom library output as well as a built-in permissions system.
+
+Automatic thumbnail download queries the API of YouTube or Vimeo to automatically add a thumbnail to the post with the video attached.
+
+The permissions system in File Cabinet must be custom-written into a theme. It does not work out of the box.
 
 == Installation ==
 
@@ -22,9 +26,9 @@ File Cabinet creates a custom post type with special functions designed for mana
 
 == Frequently Asked Questions ==
 
-= I set permissions on files but they're still showing up in loops. =
+= I set permissions on files but they're still showing up. =
 
-The permissions system is just for developer reference at the current time. It makes no changes to standard WordPress loops. Steps must be taken by an expert developer to make the permissions system 'secure'. Even then no steps have been taken to protect the URL of the downloadable file when hosted by WordPress. We will add documentation on how to implement this system upon request.
+The permissions system is just for developer reference at the current time. It makes no changes to standard WordPress loops. Steps must be taken by an expert developer to make the permissions system 'secure'. Even then no steps have been taken to protect the URL of the downloadable file when hosted by WordPress.
 
 == Screenshots ==
 
@@ -33,6 +37,10 @@ The permissions system is just for developer reference at the current time. It m
 3. Each file has all the capabilities of any normal post.
 
 == Changelog ==
+
+= 1.2.4 =
+* Fixed a bug where automatic thumbnail download was still activated when the setting was turned off.
+* Documentation updates.
 
 = 1.2.3 =
 * Added the ability to select which post types get the File Cabinet Shortcodes metabox.

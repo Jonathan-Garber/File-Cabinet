@@ -7,7 +7,7 @@
 	
 	Description: File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.
 	
-	Version: 1.2.3
+	Version: 1.2.4
 	
 	Author: TechStudio
 	Author URI: http://techstudio.co
