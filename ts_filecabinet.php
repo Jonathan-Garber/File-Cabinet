@@ -1,28 +1,22 @@
 <?php
 
 /*
+Plugin Name: File Cabinet
+Plugin URI: http://techstudio.co/wordpress/plugins/file-cabinet	
+Description: File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.	
+Version: 1.2.5	
+Author: TechStudio
+Author URI: http://techstudio.co	
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-	Plugin Name: File Cabinet
-	Plugin URI: http://techstudio.co/wordpress/plugins/file-cabinet
-	
-	Description: File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.
-	
-	Version: 1.2.4
-	
-	Author: TechStudio
-	Author URI: http://techstudio.co
-	
-	License URI: http://www.gnu.org/licenses/gpl-2.0.html
-	 
-	Copyright 2011 TECH STUDIO, INC (FLORIDA, USA)  | ( email: ryan@techstudio.co )
-	This program is free software; you can redistribute it and/or modify it under the terms
-	of the GNU General Public License, version 2, as published by the Free Software Foundation.
-	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-	See the GNU General Public License for more details. You should have received a copy of
-	the GNU General Public License along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
+Copyright 2011 TECH STUDIO, INC (FLORIDA, USA)  | ( email: ryan@techstudio.co )
+This program is free software; you can redistribute it and/or modify it under the terms
+of the GNU General Public License, version 2, as published by the Free Software Foundation.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details. You should have received a copy of
+the GNU General Public License along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 //set defaults on activation

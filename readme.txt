@@ -38,6 +38,9 @@ The permissions system is just for developer reference at the current time. It m
 
 == Changelog ==
 
+= 1.2.5 =
+* Automatic thumbnail download now only operates if the post has no thumbnail when updated. If a thumbnail is set manually, automatic thumbnail download will no longer overwrite it.
+
 = 1.2.4 =
 * Fixed a bug where automatic thumbnail download was still activated when the setting was turned off.
 * Documentation updates.
