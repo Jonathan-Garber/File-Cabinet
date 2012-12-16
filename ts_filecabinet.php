@@ -23,15 +23,20 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 register_activation_hook( __FILE__, 'fc_defaults' );
 
 function fc_defaults(){
-		update_option("fc_nameS", 'File');
-		update_option("fc_nameP", 'Files');
-		update_option("fc_slug", 'my_files');
-		update_option("fc_desc", 'simple file cabinet');
-		update_option("fc_public_query", 'true');
-		update_option("fc_auto_thumb", 'true');
-		update_option("fc_permissions", 'false');
-		update_option("fc_video_width", '420');
-		update_option("fc_video_height", '420');
+		/*
+		Use add_option so we do not overwrite the option if it currently exists
+		Useful for avoiding overwrites if the user has to activate/deactivate manually...
+		This is also why you should always use unique key names for plugin options. Avoid name conflicts with other plugins
+		*/
+		add_option("fc_nameS", 'File');
+		add_option("fc_nameP", 'Files');
+		add_option("fc_slug", 'my_files');
+		add_option("fc_desc", 'simple file cabinet');
+		add_option("fc_public_query", 'true');
+		add_option("fc_auto_thumb", 'true');
+		add_option("fc_permissions", 'false');
+		add_option("fc_video_width", '420');
+		add_option("fc_video_height", '420');
 }
 
 
