@@ -1,42 +1,43 @@
 <?php
 
 /*
-Plugin Name: File Cabinet
-Plugin URI: http://techstudio.co/wordpress/plugins/file-cabinet	
-Description: File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.	
-Version: 1.2.5	
-Author: TechStudio
-Author URI: http://techstudio.co	
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Copyright 2011 TECH STUDIO, INC (FLORIDA, USA)  | ( email: ryan@techstudio.co )
-This program is free software; you can redistribute it and/or modify it under the terms
-of the GNU General Public License, version 2, as published by the Free Software Foundation.
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-See the GNU General Public License for more details. You should have received a copy of
-the GNU General Public License along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	Plugin Name: File Cabinet
+	Plugin URI: http://techstudio.co/wordpress/plugins/file-cabinet
+	
+	Description: File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.
+	
+	Version: 1.2.5
+	
+	Author: TechStudio
+	Author URI: http://techstudio.co
+	
+	License URI: http://www.gnu.org/licenses/gpl-2.0.html
+	 
+	Copyright 2011 TECH STUDIO, INC (FLORIDA, USA)  | ( email: ryan@techstudio.co )
+	This program is free software; you can redistribute it and/or modify it under the terms
+	of the GNU General Public License, version 2, as published by the Free Software Foundation.
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+	See the GNU General Public License for more details. You should have received a copy of
+	the GNU General Public License along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 */
 
 //set defaults on activation
 register_activation_hook( __FILE__, 'fc_defaults' );
 
 function fc_defaults(){
-		/*
-		Use add_option so we do not overwrite the option if it currently exists
-		Useful for avoiding overwrites if the user has to activate/deactivate manually...
-		This is also why you should always use unique key names for plugin options. Avoid name conflicts with other plugins
-		*/
-		add_option("fc_nameS", 'File');
-		add_option("fc_nameP", 'Files');
-		add_option("fc_slug", 'my_files');
-		add_option("fc_desc", 'simple file cabinet');
-		add_option("fc_public_query", 'true');
-		add_option("fc_auto_thumb", 'true');
-		add_option("fc_permissions", 'false');
-		add_option("fc_video_width", '420');
-		add_option("fc_video_height", '420');
+		update_option("fc_nameS", 'File');
+		update_option("fc_nameP", 'Files');
+		update_option("fc_slug", 'my_files');
+		update_option("fc_desc", 'simple file cabinet');
+		update_option("fc_public_query", 'true');
+		update_option("fc_auto_thumb", 'true');
+		update_option("fc_permissions", 'false');
+		update_option("fc_video_width", '420');
+		update_option("fc_video_height", '420');
 }
 
 
@@ -844,11 +845,8 @@ function tsfc_save_custom_metabox( $post_id ) {
 		$type = tsfc_video_type($post_id);
 		if ($type == 'vimeo_video' || $type == 'youtube_video'){
 			$post_thumbnail_id = get_post_thumbnail_id( $post_id );
-			//if post has a thumbnail is empty we autoDL else we do nothing		
-			if (empty($post_thumbnail_id)){
-				wp_delete_post( $post_thumbnail_id, true );
-				tsfc_check_add_thumb($post_id);
-			}
+			wp_delete_post( $post_thumbnail_id, true );
+			tsfc_check_add_thumb($post_id);
 		}
 	}
 
