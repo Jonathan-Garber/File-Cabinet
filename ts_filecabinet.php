@@ -29,15 +29,15 @@
 register_activation_hook( __FILE__, 'fc_defaults' );
 
 function fc_defaults(){
-		update_option("fc_nameS", 'File');
-		update_option("fc_nameP", 'Files');
-		update_option("fc_slug", 'my_files');
-		update_option("fc_desc", 'simple file cabinet');
-		update_option("fc_public_query", 'true');
-		update_option("fc_auto_thumb", 'true');
-		update_option("fc_permissions", 'false');
-		update_option("fc_video_width", '420');
-		update_option("fc_video_height", '420');
+		add_option("fc_nameS", 'File');
+		add_option("fc_nameP", 'Files');
+		add_option("fc_slug", 'my_files');
+		add_option("fc_desc", 'simple file cabinet');
+		add_option("fc_public_query", 'true');
+		add_option("fc_auto_thumb", 'true');
+		add_option("fc_permissions", 'false');
+		add_option("fc_video_width", '720');
+		add_option("fc_video_height", '1280');
 }
 
 
@@ -480,9 +480,9 @@ $post_role = unserialize($post_role);
 $remote_url = get_metadata('post', $post->ID, 'file_url', true);
 $vimeo_video = get_metadata('post', $post->ID, 'vimeo_video', true);
 $youtube_video = get_metadata('post', $post->ID, 'youtube_video', true);
-
-$width = get_metadata('post', $post->ID, 'width', true);
-$height = get_metadata('post', $post->ID, 'height', true);
+if ($vimeo_video){
+$width = get_metadata('post', $post->ID, 'vimeo_video_width', true);
+$height = get_metadata('post', $post->ID, 'vimeo_video_height', true);}if ($youtube_video){$width = get_metadata('post', $post->ID, 'youtube_video_width', true);$height = get_metadata('post', $post->ID, 'youtube_video_height', true);}
 
 if ($width == ''){
 $width = get_option( "tsfc_default_width" );
@@ -585,47 +585,26 @@ if ($remote_url){
 			<p><input name="vimeo_url" type="text" class="text-input" size="15" value="<?php echo $vimeo_video ?>" /></p>
 			<p><em>Attach a Vimeo video by inputting its video ID. This can be found in the URL of the video, usually after 'vimeo.com/'.</em></p>
 		</div>
-		
-		<div class="video-settings">
-			<h4>Video Settings</h4>
-			<table class="form-table">
-				<tbody>
-					<?php $default = get_metadata('post', $post->ID, 'default', true); ?>
-					<tr>
-						<th scope="row">Use Default or Custom Settings?</th>
-						<td>
-							<label>
-								<input <?php if ($default == 'yes') { echo 'checked="checked"'; } ?> class="rb" name="fc_video_settings" type="radio" value="default"> Default
-							</label><br>
-							<label>
-								<input <?php if ($default == 'no') { echo 'checked="checked"'; } ?> class="rb" name="fc_video_settings" type="radio" value="custom"> Custom
-							</label>
-						</td>
-					</tr>			
-					<tr class="video_width">
-						<th scope="row">Width</th>
-						<td>
-							<?php // let's validate that these are just numbers ?>
-							<input class="ti" id="fc_video_default_width" name="cvideo_width" type="text" value="<?php echo $width ?>" size="5">px<br>
-							<span><em>Set the default width in pixels. Leave either option plank to have the plugin calculate the blank option via aspect ratio.</em></span>
-						</td>
-					</tr>
-					<tr class="video_height">
-						<?php // default to blank ?>
-						<th scope="row">Height</th>
-						<td>
-							<?php // let's validate that these are just numbers ?>
-							<input class="ti" id="fc_video_default_height" name="cvideo_height" type="text" value="<?php echo $height ?>" size="5">px<br>
-							<span><em>Set the default height. Leave either option plank to have the plugin calculate the blank option via aspect ratio.</em></span>
-						</td>
-					</tr>
-				</tbody>
-			</table>	
-		</div>
-	
-	</div>
-
-</div>
+			<div class="video-settings">
+				<h4>Video Settings</h4>
+				<table class="form-table">
+					<tbody>
+						<?php 						$default = get_metadata('post', $post->ID, 'default', true);						$youtube_related_video = get_metadata('post', $post->ID, 'related_video', true);												?>
+						<tr>
+							<th scope="row">Use Default or Custom Settings?</th>
+							<td>
+								<label>
+									<input <?php if ($default == 'yes') { echo 'checked="checked"'; } ?> class="rb" name="fc_video_settings" type="radio" value="default"> Default
+								</label><br>
+								<label>
+									<input <?php if ($default == 'no') { echo 'checked="checked"'; } ?> class="rb" name="fc_video_settings" type="radio" value="custom"> Custom
+								</label>
+							</td>
+						</tr>					</tbody>				</table>			<div class="youtube_custom_settings">									<table class="form-table">					<tbody>											<tr>							<th scope="row">Hide Related Videos</th>							<td>								<label>									<input <?php if ($youtube_related_video == 'on') { echo 'checked="checked"'; } ?> type="checkbox" name="youtube_related_video">								</label>															</td>						</tr>													<tr>												<th scope="row">Width</th>							<td>								<input class="ti" id="fc_video_default_width" name="yvideo_width" type="text" value="<?php echo $width ?>" size="5">px<br>								<span><em>Set the default width in pixels. Leave either option plank to have the plugin calculate the blank option via aspect ratio.</em></span>							</td>						</tr>													<tr>							<th scope="row">Height</th>							<td>								<input class="ti" id="fc_video_default_height" name="yvideo_height" type="text" value="<?php echo $height ?>" size="5">px<br>								<span><em>Set the default height. Leave either option plank to have the plugin calculate the blank option via aspect ratio.</em></span>							</td>												</tr>
+					</tbody>
+				</table>
+			</div>			<div class="vimeo_custom_settings">									<table class="form-table">					<tbody>						<tr>												<th scope="row">Width</th>							<td>								<input class="ti" id="fc_video_default_width" name="vvideo_width" type="text" value="<?php echo $width ?>" size="5">px<br>								<span><em>Set the default width in pixels. Leave either option plank to have the plugin calculate the blank option via aspect ratio.</em></span>							</td>						</tr>													<tr>							<th scope="row">Height</th>							<td>								<input class="ti" id="fc_video_default_height" name="vvideo_height" type="text" value="<?php echo $height ?>" size="5">px<br>								<span><em>Set the default height. Leave either option plank to have the plugin calculate the blank option via aspect ratio.</em></span>							</td>												</tr>					</tbody>				</table>			</div>					</div>
+	</div></div>
 
 <h4>File Category:</h4>
 
@@ -712,11 +691,10 @@ if ($permissions == 'true'){
 ?>
 
 <br><br>
-<?php // we offer this button only if someone has opened a post that already existed, it's just a button that saves them having to go to the Update button, it also reminds them that they actually must click Update when they make changes, some WordPress functions save with Ajax and don't require it, so let's make the distinction ?>
+<?php // we offer this button only if someone has opened a post that already existed, it's just a button that saves them having to go to the Update button, it also reminds them that they actually must click Update when they make changes, some WordPress functions save with Ajax and don't require it, so let's make the distinction ?><input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="Update">
 <?php
 	if ($no_attachments != true){
 ?>
-<input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="Update">
 <a target="_blank" href="/wp-content/plugins/file-cabinet/preview.php?id=<?php echo $post->ID ?>" class="button-secondary">Preview Attachment</a>
 <input type="submit" name="remove_it" value="Remove Attachment" class="button-secondary" />
 <?php		
@@ -795,49 +773,43 @@ function tsfc_save_custom_metabox( $post_id ) {
 	if ( !empty($youtube) || !empty($vimeo) ){
 		//remove existing files
 		$rm = get_metadata('post', $post->ID, 'upload_attachment', true);
-		wp_delete_attachment($rm, false);		
+		wp_delete_attachment($rm, false);
 		delete_post_meta($post_id, 'upload_attachment');		
 		delete_post_meta($post_id, 'vimeo_video');
 		delete_post_meta($post_id, 'youtube_video');		
 		delete_post_meta($post_id, 'file_url');
-		delete_post_meta($post_id, 'embed');
-			
-
-		//are we adding a youtube or vimeo video?
-		if (!empty($youtube)){
-			$video_url = $_POST['youtube_url'];
-			$video_type = 'youtube_video';
-		}
-		if (!empty($vimeo)){
-			$video_url = $_POST['vimeo_url'];
-			$video_type = 'vimeo_video';
-		}
-
-		//are we setting custom height?
-		$custom_width = $_POST['cvideo_width'];
-		$custom_height = $_POST['cvideo_height'];
+		delete_post_meta($post_id, 'embed');						
+		delete_post_meta($post_id, 'vimeo_video_height');		
+		delete_post_meta($post_id, 'vimeo_video_width');		
+		delete_post_meta($post_id, 'youtube_video_height');		
+		delete_post_meta($post_id, 'youtube_video_width');				
+		delete_post_meta($post_id, 'related_video');		
+		$custom = $_POST['fc_video_settings'];
 		
-			if (empty($custom_width)){
-				$width = get_option( "fc_video_width" );
-				update_post_meta( $post->ID, 'default', 'yes' );
-			}else{
-				$width = $custom_width;
-				update_post_meta( $post_id, 'default', 'no' );
-			}
-
-			if (empty($custom_height)){
-				$height = get_option( "fc_video_height" );
-				update_post_meta( $post->ID, 'default', 'yes' );
-			}else{
-				$height = $custom_height;
-				update_post_meta( $post_id, 'default', 'no' );
-			}
-			
-		//lets do the update with the height video and such etc...	
-			update_post_meta( $post->ID, $video_type, $video_url );
-			update_post_meta( $post->ID, 'width', $width );	
-			update_post_meta( $post->ID, 'height', $height );
-			tsfc_generate_video($video_type, $video_url, $post_id, $width, $height);		
+if (!empty($youtube)){				
+		$video_url = $_POST['youtube_url'];				
+		$video_type = 'youtube_video';												
+		
+	if ($custom == 'custom'){					
+		update_post_meta( $post_id, 'default', 'no' );					
+		$width = $_POST['yvideo_width'];					
+		$height = $_POST['yvideo_height'];															
+		$related_video = $_POST['youtube_related_video'];										
+		
+		update_post_meta( $post->ID, 'related_video', $related_video );										
+		
+		$options .= '?';										
+		if ($related_video == 'on'){					
+			$options .= 'rel=0'.'&';
+		}
+	}else{					
+		update_post_meta( $post_id, 'default', 'yes' );					
+		$width = get_option( "fc_video_width" );					
+		$height = get_option( "fc_video_height" );	}	
+}		
+		
+if (!empty($vimeo)){		$video_url = $_POST['vimeo_url'];		$video_type = 'vimeo_video';	if ($custom == 'custom'){		update_post_meta( $post_id, 'default', 'no' );		$width = $_POST['vvideo_width'];		$height = $_POST['vvideo_height'];	}else{		update_post_meta( $post_id, 'default', 'yes' );		$width = get_option( "fc_video_width" );		$height = get_option( "fc_video_height" );	}}
+update_post_meta( $post->ID, $video_type, $video_url );update_post_meta( $post->ID, $video_type.'_width', $width );update_post_meta( $post->ID, $video_type.'_height', $height );tsfc_generate_video($video_type, $video_url, $post_id, $width, $height, $options);	
 	}
 
 	// get thumbs
@@ -915,10 +887,10 @@ function tsfc_save_custom_metabox( $post_id ) {
 	}	
 }
 
-function tsfc_generate_video($type, $video_id, $post_id, $width, $height){
+function tsfc_generate_video($type, $video_id, $post_id, $width, $height, $options = ''){
 
 	if ($type == 'youtube_video'){	
-		$embed = '<iframe class="youtube-player" type="text/html" width="'.$width.'" height="'.$height.'" src="http://www.youtube.com/embed/'.$video_id.'" frameborder="0"></iframe>';
+		$embed = '<iframe class="youtube-player" type="text/html" width="'.$width.'" height="'.$height.'" src="http://www.youtube.com/embed/'.$video_id.$options.'" frameborder="0"></iframe>';
 		
 	}else if ($type == 'vimeo_video'){	
 			$embed = '<iframe src="http://player.vimeo.com/video/'.$video_id.'" width="'.$width.'" height="'.$height.'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';	
