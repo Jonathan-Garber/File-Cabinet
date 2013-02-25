@@ -33,8 +33,12 @@ jQuery(document).ready(function($) {
 		}
 	);
 
-	$('.youtube_custom_settings').hide();	
+	$('.youtube_custom_settings').hide();
+	$('.youtube_player_settings').hide();
+	
 	$('.vimeo_custom_settings').hide();
+	$('.vimeo_player_settings').hide();
+	
 	$('.video_width').hide();
 	$('.video_height').hide();
 
@@ -59,27 +63,29 @@ jQuery(document).ready(function($) {
 		var option = $("input[name='fc_video_settings']:checked").val();
 		
 		if ($method == 'youtube'){		
-			if (option == 'custom'){
 					$('.vimeo_custom_settings').hide();
-					$('.tsfc-attachment-methods .video-settings input.ti').prop('disabled', false);								
+					$('.vimeo_player_settings').hide();
+					$('.youtube_player_settings').show();
+			if (option == 'custom'){						
 					$('.'+$method+'_custom_settings').show();
 				}
-				else {
-					$('.vimeo_custom_settings').hide();
-					$('.tsfc-attachment-methods .video-settings input.ti').prop('disabled', true);				
-					$('.'+$method+'_custom_settings').hide();			
+				else {			
+					$('.'+$method+'_custom_settings').hide();
 				}
 		}
-		if ($method == 'vimeo'){		
-			if (option == 'custom'){
+		
+		
+		if ($method == 'vimeo'){
 					$('.youtube_custom_settings').hide();
+					$('.youtube_player_settings').hide();
+					$('.vimeo_player_settings').show();
+			if (option == 'custom'){
 					$('.tsfc-attachment-methods .video-settings input.ti').prop('disabled', false);								
-					$('.'+$method+'_custom_settings').show();
+					$('.'+$method+'_custom_settings').show();				
 				}
 				else {
-					$('.youtube_custom_settings').hide();
 					$('.tsfc-attachment-methods .video-settings input.ti').prop('disabled', true);				
-					$('.'+$method+'_custom_settings').hide();		
+					$('.'+$method+'_custom_settings').hide();				
 				}
 		}		
 		
