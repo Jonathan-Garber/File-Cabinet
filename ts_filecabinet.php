@@ -861,18 +861,18 @@ if (!empty($youtube)){
 		$video_url = $_POST['youtube_url'];				
 		$video_type = 'youtube_video';												
 		
-	if ($custom == 'custom'){					
-		update_post_meta( $post_id, 'youtube_default', 'no' );					
-		$width = $_POST['yvideo_width'];					
-		$height = $_POST['yvideo_height'];															
-		$related_video = $_POST['youtube_related_video'];										
-		
+		$related_video = $_POST['youtube_related_video'];	
 		update_post_meta( $post->ID, 'related_video', $related_video );										
 		
 		$options .= '?';										
-		if ($related_video == 'on'){					
+		if ($related_video == 'on'){
 			$options .= 'rel=0'.'&';
 		}
+		
+	if ($custom == 'custom'){
+		update_post_meta( $post_id, 'youtube_default', 'no' );					
+		$width = $_POST['yvideo_width'];					
+		$height = $_POST['yvideo_height'];															
 	}else{					
 		update_post_meta( $post_id, 'youtube_default', 'yes' );					
 		$width = get_option( "fc_video_width" );					
