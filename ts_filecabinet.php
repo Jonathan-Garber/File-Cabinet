@@ -902,8 +902,8 @@ if (!empty($vimeo)){
 	if ($enabled == 'true'){
 		$type = tsfc_video_type($post_id);
 		if ($type == 'vimeo_video' || $type == 'youtube_video'){
-			$post_thumbnail_id = get_post_thumbnail_id( $post_id );
-			wp_delete_post( $post_thumbnail_id, true );
+			//$post_thumbnail_id = get_post_thumbnail_id( $post_id );
+			//wp_delete_post( $post_thumbnail_id, true );
 			tsfc_check_add_thumb($post_id);
 		}
 	}
