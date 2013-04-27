@@ -5,7 +5,7 @@ Donate link: http://techstudio.co/wordpress/plugins/file-cabinet
 Tags: file, embed, embedding, youtube, vimeo, dropbox, google drive
 Requires at least: 2.0.2
 Tested up to: 3.4.2
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ The permissions system is just for developer reference at the current time. It m
 3. Each file has all the capabilities of any normal post.
 
 == Changelog ==
+
+= 1.2.6 =
+* Fixed a bug in category permissions
 
 = 1.2.5 =
 * Automatic thumbnail download now only operates if the post has no thumbnail when updated. If a thumbnail is set manually, automatic thumbnail download will no longer overwrite it.
