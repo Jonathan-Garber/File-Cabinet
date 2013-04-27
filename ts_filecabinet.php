@@ -7,7 +7,7 @@
 	
 	Description: File Cabinet creates a custom post type with special functions designed for managing a library of files of various types.
 	
-	Version: 1.2.5
+	Version: 1.2.6
 	
 	Author: TechStudio
 	Author URI: http://techstudio.co
@@ -1163,7 +1163,7 @@ function tsfc_category_check($term_id){
 }
 
 function tsfc_get_category_permissions($term_id){
-	$category_role = get_option( "taxonomy_$term_id" );
+	$category_role = get_option( "taxonomy_".$term_id );
 	$category_role = unserialize($category_role);
 return $category_role;
 }
