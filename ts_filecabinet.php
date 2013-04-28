@@ -25,6 +25,55 @@
 
 */
 
+//check for uprade routines and do upgrade procedure if needed
+register_activation_hook( __FILE__, 'tsfc_tst_act' );
+
+function tsfc_get_version() {
+$plugin_data = get_plugin_data( __FILE__ );
+$plugin_version = $plugin_data['Version'];
+return $plugin_version;
+}
+
+add_action('admin_init','tsfc_tst_chk');
+function tsfc_tst_chk() {
+	$last_known_version = get_option('tsfc_version');	
+	$current_version = tsfc_get_version();	
+	//we check here if the current version is same as old version this will run every page load so we ensure we catch upgrades
+	//being a simple comparison it does not hurt to run on every page load
+	
+	if ( $last_known_version != $current_version && $last_known_version != '' ) {
+		update_option( "tsfc_version", $current_version );
+		
+		//this should be changed or disabled with every version change.
+		//this is only called or used when we need to actually adjust something on their site during the update otherwise we comment out the call to it
+		update_routine();
+	}
+	
+	
+}
+
+function tsfc_tst_act(){
+	$version = tsfc_get_version();
+	update_option("tsfc_version", $version);
+}
+
+
+//this should be changed or disabled with every version change.
+//this is only called or used when we need to actually adjust something on their site during the update otherwise we comment out the call to it
+function update_routine(){
+
+	add_option("fc_nameS", 'File');
+	add_option("fc_nameP", 'Files');
+	add_option("fc_slug", 'my_files');
+	add_option("fc_desc", 'simple file cabinet');
+	add_option("fc_public_query", 'true');
+	add_option("fc_auto_thumb", 'true');
+	add_option("fc_permissions", 'false');
+	add_option("fc_video_width", '800');
+	add_option("fc_video_height", '600');		
+}
+
+
 //set defaults on activation
 register_activation_hook( __FILE__, 'fc_defaults' );
 
@@ -1149,15 +1198,15 @@ function tsfc_category_check($term_id){
 	$user_role = tsfc_current_user_role();
 	
 		if (in_array($user_role, $category_role) || in_array('everyone', $category_role)){
-			$permission = true;
+			$permission = 'true';
 		}else{
-			$permission = false;
+			$permission = 'false';
 		}
 		
 	}else if (in_array('everyone', $category_role)){
-			$permission = true;
+			$permission = 'true';
 	}else{
-			$permission = false;
+			$permission = 'false';
 	}
 			return $permission;
 }
@@ -1285,53 +1334,4 @@ function tsfc_odd_check($number) {
 	if ( $number&1 )
 		return true;
 	return false; 
-}
-
-
-//check for uprade routines and do upgrade procedure if needed
-register_activation_hook( __FILE__, 'tsfc_tst_act' );
-
-function tsfc_get_version() {
-$plugin_data = get_plugin_data( __FILE__ );
-$plugin_version = $plugin_data['Version'];
-return $plugin_version;
-}
-
-add_action('admin_init','tsfc_tst_chk');
-function tsfc_tst_chk() {
-	$last_known_version = get_option('tsfc_version');	
-	$current_version = tsfc_get_version();	
-	//we check here if the current version is same as old version this will run every page load so we ensure we catch upgrades
-	//being a simple comparison it does not hurt to run on every page load
-	
-	if ( $last_known_version != $current_version && $last_known_version != '' ) {
-		update_option( "tsfc_version", $current_version );
-		
-		//this should be changed or disabled with every version change.
-		//this is only called or used when we need to actually adjust something on their site during the update otherwise we comment out the call to it
-		update_routine();
-	}
-	
-	
-}
-
-function tsfc_tst_act(){
-	$version = tsfc_get_version();
-	update_option("tsfc_version", $version);
-}
-
-
-//this should be changed or disabled with every version change.
-//this is only called or used when we need to actually adjust something on their site during the update otherwise we comment out the call to it
-function update_routine(){
-
-	update_option("fc_nameS", 'File');
-	update_option("fc_nameP", 'Files');
-	update_option("fc_slug", 'my_files');
-	update_option("fc_desc", 'simple file cabinet');
-	update_option("fc_public_query", 'true');
-	update_option("fc_auto_thumb", 'true');
-	update_option("fc_permissions", 'false');
-	update_option("fc_video_width", '800');
-	update_option("fc_video_height", '600');		
 }
